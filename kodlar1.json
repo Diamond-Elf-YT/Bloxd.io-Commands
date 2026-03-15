@@ -1,17 +1,17 @@
 {
     "/tp": {
-        "desc": "Bir oyuncuyu başka bir oyuncunun yanına taşımaya yarar.",
+        "desc": "Bir oyuncuya ışınlanmaya yarar.",
         "kullanım": [
-            "/kick",
-            "oyuncu adı"
+            "/tp",
+            "oyuncu_adı"
         ]
     },
     "/gm, /gamemode": {
         "desc": "Oyun modunu değiştirmeye yarar",
         "kullanım": [
             "/gm",
-            "oyun modu",
-            "oyuncu adı"
+            "oyun_modu",
+            "oyuncu_adı"
         ],
         "liste": {
             "c, creative": "Yaratıcı",
@@ -32,9 +32,17 @@
         "desc": "Bir oyuncuyu sunucudan banlamaya yarar.",
         "kullanım": [
             "/ban",
-            "oyuncu adı"
+            "oyuncu_adı"
         ]
     },
+    "/kick": {
+        "desc": "Bir oyuncuyu sunucudan atamaya yarar.",
+        "kullanım": [
+            "/kick",
+            "oyuncu_adı"
+        ]
+    }
+}    },
     "/kick": {
         "desc": "Bir oyuncuyu sunucudan atamaya yarar.",
         "kullanım": [
