@@ -42,12 +42,4 @@
             "oyuncu_adı"
         ]
     }
-}    },
-    "/kick": {
-        "desc": "Bir oyuncuyu sunucudan atamaya yarar.",
-        "kullanım": [
-            "/kick",
-            "oyuncu adı"
-        ]
-    }
 }
