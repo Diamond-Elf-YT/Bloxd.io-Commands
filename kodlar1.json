@@ -1,0 +1,45 @@
+{
+    "/tp": {
+        "desc": "Bir oyuncuyu başka bir oyuncunun yanına taşımaya yarar.",
+        "kullanım": [
+            "/kick",
+            "oyuncu adı"
+        ]
+    },
+    "/gm, /gamemode": {
+        "desc": "Oyun modunu değiştirmeye yarar",
+        "kullanım": [
+            "/gm",
+            "oyun modu",
+            "oyuncu adı"
+        ],
+        "liste": {
+            "c, creative": "Yaratıcı",
+            "s, survival": "Hayatta kalma",
+            "p peacefull": "Huzurlu",
+            "sa survival adventure": "Hayatta kalma macera",
+            "pa peacefull adventure": "Huzurlu macera",
+            "spectator": "İzleyici"
+        }
+    },
+    "/togglekeepinven": {
+        "desc": "Ölünce envanterini kaybetmeyi açıp kapatır.",
+        "kullanım": [
+            "/togglekeepinven"
+        ]
+    },
+    "/ban": {
+        "desc": "Bir oyuncuyu sunucudan banlamaya yarar.",
+        "kullanım": [
+            "/ban",
+            "oyuncu adı"
+        ]
+    },
+    "/kick": {
+        "desc": "Bir oyuncuyu sunucudan atamaya yarar.",
+        "kullanım": [
+            "/kick",
+            "oyuncu adı"
+        ]
+    }
+}
