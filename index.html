@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Komutlar</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Komutlar</h1>
+    <div id="commands"></div>
+
+    <script>
+        fetch('kodlar1.json')
+            .then(response => response.json())
+            .then(data => {
+                const commandsDiv = document.getElementById('commands');
+                for (const [command, details] of Object.entries(data)) {
+                    const commandDiv = document.createElement('div');
+                    commandDiv.className = 'command';
+                    
+                    const title = document.createElement('h2');
+                    title.textContent = command;
+                    commandDiv.appendChild(title);
+                    
+                    const descDiv = document.createElement('div');
+                    descDiv.className = 'desc-box';
+                    descDiv.textContent = details.desc;
+                    commandDiv.appendChild(descDiv);
+                    
+                    if (details.kullanım) {
+                        const usageDiv = document.createElement('div');
+                        usageDiv.className = 'usage-section';
+                        const usageTitle = document.createElement('h3');
+                        usageTitle.textContent = 'Kullanım:';
+                        usageDiv.appendChild(usageTitle);
+                        details.kullanım.forEach(use => {
+                            const input = document.createElement('input');
+                            input.type = 'text';
+                            input.value = use;
+                            input.className = 'usage-input';
+                            usageDiv.appendChild(input);
+                        });
+                        commandDiv.appendChild(usageDiv);
+                    }
+                    
+                    if (details.liste) {
+                        const listTitle = document.createElement('h3');
+                        listTitle.textContent = 'Liste:';
+                        commandDiv.appendChild(listTitle);
+                        
+                        const listUl = document.createElement('ul');
+                        for (const [key, val] of Object.entries(details.liste)) {
+                            const li = document.createElement('li');
+                            li.textContent = `${key}: ${val}`;
+                            listUl.appendChild(li);
+                        }
+                        commandDiv.appendChild(listUl);
+                    }
+                    
+                    commandsDiv.appendChild(commandDiv);
+                }
+            })
+            .catch(error => console.error('JSON yüklenirken hata:', error));
+    </script>
+</body>
+</html>
