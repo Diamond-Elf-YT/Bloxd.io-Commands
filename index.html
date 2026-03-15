@@ -34,13 +34,80 @@
                         const usageTitle = document.createElement('h3');
                         usageTitle.textContent = 'Kullanım:';
                         usageDiv.appendChild(usageTitle);
+
+                        // Her bir kullanım parçası için düzenlenebilir input
+                        const usageInputs = [];
                         details.kullanım.forEach(use => {
                             const input = document.createElement('input');
                             input.type = 'text';
                             input.value = use;
                             input.className = 'usage-input';
+                            usageInputs.push(input);
                             usageDiv.appendChild(input);
                         });
+
+                        // Birleştirilmiş kullanım satırı (yalnızca kopyalanabilir)
+                        const combinedRow = document.createElement('div');
+                        combinedRow.className = 'combined-usage';
+
+                        const combinedInput = document.createElement('input');
+                        combinedInput.type = 'text';
+                        combinedInput.readOnly = true;
+                        combinedInput.className = 'usage-input combined-input';
+                        combinedRow.appendChild(combinedInput);
+
+                        const copyButton = document.createElement('button');
+                        copyButton.type = 'button';
+                        copyButton.textContent = 'Kopyala';
+                        copyButton.className = 'copy-button';
+                        combinedRow.appendChild(copyButton);
+
+                        const updateCombined = () => {
+                            combinedInput.value = usageInputs.map(i => i.value.trim()).filter(Boolean).join(' ');
+                        };
+
+                        usageInputs.forEach(input => {
+                            input.addEventListener('input', updateCombined);
+                        });
+
+                        updateCombined();
+
+                        copyButton.addEventListener('click', () => {
+                            const copyText = () => {
+                                copyButton.textContent = 'Kopyalandı!';
+                                setTimeout(() => {
+                                    copyButton.textContent = 'Kopyala';
+                                }, 1200);
+                            };
+
+                            const textToCopy = combinedInput.value;
+
+                            if (navigator.clipboard && navigator.clipboard.writeText) {
+                                navigator.clipboard.writeText(textToCopy).then(copyText).catch(() => {
+                                    fallbackCopyText(textToCopy, copyText);
+                                });
+                            } else {
+                                fallbackCopyText(textToCopy, copyText);
+                            }
+                        });
+
+                        function fallbackCopyText(text, onSuccess) {
+                            const textarea = document.createElement('textarea');
+                            textarea.value = text;
+                            textarea.style.position = 'fixed';
+                            textarea.style.opacity = '0';
+                            document.body.appendChild(textarea);
+                            textarea.select();
+                            try {
+                                document.execCommand('copy');
+                                onSuccess();
+                            } catch {
+                                alert('Kopyalama sırasında bir hata oluştu.');
+                            }
+                            document.body.removeChild(textarea);
+                        }
+
+                        usageDiv.appendChild(combinedRow);
                         commandDiv.appendChild(usageDiv);
                     }
                     
